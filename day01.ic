@@ -57,16 +57,25 @@ Print ::= (f: float64) -> () {
   printf(&"%f"[0], f)
 }
 
-test := [1721, 979, 366, 299, 675, 1456]
-n := 6  // == test.size
-i := 0
-while (i < n) do {
-  j := i + 1
-  while (j < n) do {
-    sum := test[i] + test[j]
-    if (sum == 2020) then {
-      Print(test[i] * test[j])
-      Print("\n")
+PartOne ::= () -> int64 {
+  test := [1721, 979, 366, 299, 675, 1456]
+  n := 6 //test.length
+
+  i := 0
+  while (i < n) do {
+    target := 2020 - test[i]
+    j := i + 1
+    while (j < n) do {
+      if (target == test[j]) then {
+        return test[i] * test[j]
+      }
+      j += 1
     }
+    i += 1
   }
 }
+
+
+Print("Part 1: ")
+Print(PartOne())
+Print("\n")
