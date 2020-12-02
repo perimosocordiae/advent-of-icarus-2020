@@ -1,17 +1,16 @@
 -- ::= import "lib/core.ic"
 io ::= import "lib/io.ic"
 
-PartOne ::= () -> int64 {
-  test := [1721, 979, 366, 299, 675, 1456]
-  n := test:?.length as int64
+PartOne ::= (nums: *[6; int64]) -> int64 {
+  n := (@nums):?.length as int64
 
   i := 0
   while (i < n) do {
-    target := 2020 - test[i]
+    target := 2020 - (@nums)[i]
     j := i + 1
     while (j < n) do {
-      if (target == test[j]) then {
-        return test[i] * test[j]
+      if (target == (@nums)[j]) then {
+        return (@nums)[i] * (@nums)[j]
       }
       j += 1
     }
@@ -20,6 +19,7 @@ PartOne ::= () -> int64 {
 }
 
 
+test := [1721, 979, 366, 299, 675, 1456]
 io.Print("Part 1: ")
-io.Print(PartOne())
+io.Print(PartOne(&test))
 io.Print("\n")
