@@ -3,7 +3,7 @@ io ::= import "lib/io.ic"
 
 PartOne ::= () -> int64 {
   test := [1721, 979, 366, 299, 675, 1456]
-  n := 6 //test.length
+  n := test:?.length as int64
 
   i := 0
   while (i < n) do {
