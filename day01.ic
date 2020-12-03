@@ -1,7 +1,8 @@
 -- ::= import "lib/core.ic"
+cstdio ::= import "lib/cstdio.ic"
 io ::= import "lib/io.ic"
 
-PartOne ::= (nums: *[6; int64]) -> int64 {
+PartOne ::= (nums: $nums) -> int64 {
   n := (@nums):?.length as int64
 
   i := 0
@@ -20,6 +21,7 @@ PartOne ::= (nums: *[6; int64]) -> int64 {
 
 
 test := [1721, 979, 366, 299, 675, 1456]
-io.Print("Part 1: ")
+io.Print("Part 1 (test): ")
 io.Print(PartOne(&test))
 io.Print("\n")
+
