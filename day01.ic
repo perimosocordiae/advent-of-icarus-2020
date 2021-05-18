@@ -5,17 +5,13 @@ io ::= import "io.ic"
 PartOne ::= (nums: $nums) -> i64 {
   n := (@nums):?.length as i64
 
-  i := 0
-  while (i < n) do {
+  for (0, n) do [i: i64] {
     target := 2020 - (@nums)[i]
-    j := i + 1
-    while (j < n) do {
+    for (i + 1, n) do [j: i64] {
       if (target == (@nums)[j]) then {
         return (@nums)[i] * (@nums)[j]
       }
-      j += 1
     }
-    i += 1
   }
 }
 
