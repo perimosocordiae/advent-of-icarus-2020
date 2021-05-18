@@ -7,6 +7,7 @@ To get started:
 git clone https://github.com/asoffer/Icarus.git
 cd Icarus
 bazel build -c dbg //compiler:interpret
+export ICARUS_MODULE_PATH=$(realpath ./stdlib)
 cd ..
 
 git clone https://github.com/perimosocordiae/advent-of-icarus-2020.git

@@ -1,9 +1,9 @@
--- ::= import "lib/core.ic"
-cstdio ::= import "lib/cstdio.ic"
-io ::= import "lib/io.ic"
+-- ::= import "core.ic"
+cstdio ::= import "cstdio.ic"
+io ::= import "io.ic"
 
-PartOne ::= (nums: $nums) -> int64 {
-  n := (@nums):?.length as int64
+PartOne ::= (nums: $nums) -> i64 {
+  n := (@nums):?.length as i64
 
   i := 0
   while (i < n) do {
