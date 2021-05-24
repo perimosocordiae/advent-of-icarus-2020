@@ -1,0 +1,47 @@
+--   ::= import "core.ic"
+io   ::= import "io.ic"
+file ::= import "file.ic"
+
+sscanf ::= foreign("sscanf",
+  ([*]char, [*]char, *i64, *i64, *char, [*]char) -> i32)
+
+PartOne ::= (filename: []char) -> i64 {
+  valid_lines := 0
+  file.With(filename) open [f: file.File] {
+    low: i64
+    high: i64
+    ch: char
+    pass: [1024; char]
+    file.Lines(f) each [line: []char] {
+      nf := sscanf(line.data, "%lld-%lld %c: %s".data,
+                   &low, &high, &ch, &pass[0])
+      if (nf != 4 as i32) then {
+        io.Print("Error parsing line: ")
+        io.Print(line)
+      } else {
+        i := 0
+        count := 0
+        while (pass[i] != `\0) do {
+          // TODO: fix segfault when this is uncommented
+          // count += (pass[i] == ch) as i64
+          if (pass[i] == ch) then {
+            count += 1
+          }
+          i += 1
+        }
+        if (low <= count <= high) then {
+          valid_lines += 1
+        }
+      }
+    }
+  }
+  return valid_lines
+}
+
+io.Print("Part 1 (test): ")
+io.Print(PartOne("inputs/02.test"))
+io.Print(`\n)
+
+io.Print("Part 1 (full): ")
+io.Print(PartOne("inputs/02.full"))
+io.Print(`\n)
