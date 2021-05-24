@@ -3,9 +3,8 @@ io   ::= import "io.ic"
 file ::= import "file.ic"
 cstdlib ::= import "cstdlib.ic"
 
-PartOne ::= (nums: []i64) -> i64 {
+PairThatSumsTo2020 ::= (nums: []i64) -> i64 {
   n := nums.length as i64
-
   for (0, n) do [i: i64] {
     target := 2020 - nums[i]
     for (i + 1, n) do [j: i64] {
@@ -14,28 +13,62 @@ PartOne ::= (nums: []i64) -> i64 {
       }
     }
   }
+  return -1
 }
 
-// TODO: use a vector here instead of fixed-length array.
-buffer: [256; i64]
-idx := 0
-file.With("inputs/01.test") open [f: file.File] {
-  file.Lines(f) each [line: []char] {
-    buffer[idx] = cstdlib.ParseInt64(line, 10 as i32)
-    idx += 1
+TripleThatSumsTo2020 ::= (nums: []i64) -> i64 {
+  n := nums.length as i64
+  for (0, n) do [i: i64] {
+    for (i + 1, n) do [j: i64] {
+      for (j + 1, n) do [k: i64] {
+        if (nums[i] + nums[j] + nums[k] == 2020) then {
+          return nums[i] * nums[j] * nums[k]
+        }
+      }
+    }
   }
+  return -1
 }
+
+PartOne ::= (filename: []char) -> i64 {
+  // TODO: use a vector here instead of fixed-length array.
+  buffer: [256; i64]
+  idx := 0
+  file.With(filename) open [f: file.File] {
+    file.Lines(f) each [line: []char] {
+      buffer[idx] = cstdlib.ParseInt64(line, 10 as i32)
+      idx += 1
+    }
+  }
+  return PairThatSumsTo2020(slice(&buffer[0], idx as u64))
+}
+
+// TODO: Remove this by making the above function generic.
+PartTwo ::= (filename: []char) -> i64 {
+  buffer: [256; i64]
+  idx := 0
+  file.With(filename) open [f: file.File] {
+    file.Lines(f) each [line: []char] {
+      buffer[idx] = cstdlib.ParseInt64(line, 10 as i32)
+      idx += 1
+    }
+  }
+  return TripleThatSumsTo2020(slice(&buffer[0], idx as u64))
+}
+
+
 io.Print("Part 1 (test): ")
-io.Print(PartOne(slice(&buffer[0], idx as u64)))
+io.Print(PartOne("inputs/01.test"))
 io.Print(`\n)
 
-idx = 0
-file.With("inputs/01.full") open [f: file.File] {
-  file.Lines(f) each [line: []char] {
-    buffer[idx] = cstdlib.ParseInt64(line, 10 as i32)
-    idx += 1
-  }
-}
 io.Print("Part 1 (full): ")
-io.Print(PartOne(slice(&buffer[0], idx as u64)))
+io.Print(PartOne("inputs/01.full"))
+io.Print(`\n)
+
+io.Print("Part 2 (test): ")
+io.Print(PartTwo("inputs/01.test"))
+io.Print(`\n)
+
+io.Print("Part 2 (full): ")
+io.Print(PartTwo("inputs/01.full"))
 io.Print(`\n)
