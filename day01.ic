@@ -59,16 +59,16 @@ PartTwo ::= (filename: []char) -> i64 {
 
 io.Print("Part 1 (test): ")
 io.Print(PartOne("inputs/01.test"))
-io.Print(`\n)
+io.Print(!\n)
 
 io.Print("Part 1 (full): ")
 io.Print(PartOne("inputs/01.full"))
-io.Print(`\n)
+io.Print(!\n)
 
 io.Print("Part 2 (test): ")
 io.Print(PartTwo("inputs/01.test"))
-io.Print(`\n)
+io.Print(!\n)
 
 io.Print("Part 2 (full): ")
 io.Print(PartTwo("inputs/01.full"))
-io.Print(`\n)
+io.Print(!\n)

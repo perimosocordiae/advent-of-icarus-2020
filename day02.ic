@@ -40,8 +40,8 @@ PartOne ::= (filename: []char) -> i64 {
 
 io.Print("Part 1 (test): ")
 io.Print(PartOne("inputs/02.test"))
-io.Print(`\n)
+io.Print(!\n)
 
 io.Print("Part 1 (full): ")
 io.Print(PartOne("inputs/02.full"))
-io.Print(`\n)
+io.Print(!\n)
