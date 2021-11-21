@@ -15,13 +15,13 @@ PartOne ::= (filename: []char) -> i64 {
     file.Lines(f) each [line: []char] {
       nf := sscanf(line.data, "%lld-%lld %c: %s".data,
                    &low, &high, &ch, &pass[0])
-      if (nf != 4 as i32) then {
+      if (nf != 4) then {
         io.Print("Error parsing line: ")
         io.Print(line)
       } else {
         i := 0
         count := 0
-        while (pass[i] != `\0) do {
+        while (pass[i] != !\0) do {
           // TODO: fix segfault when this is uncommented
           // count += (pass[i] == ch) as i64
           if (pass[i] == ch) then {
